@@ -9,7 +9,12 @@ interface PageProps {
   params: Promise<PageParams>;
 }
 
-const booksData: Record<string, { title: string; content: string }> = {
+interface BookData {
+  title: string;
+  content: string;
+}
+
+const booksData: Record<string, BookData> = {
   lembur: {
     title: "Lembur",
     content: `Di ruang yang sunyi ini, waktu bergerak dengan irama yang berbeda. Bukan lagi detik yang diukur, melainkan hembusan napas yang tertahan. Lembur bukan sekadar tambahan jam di belakang meja, tapi perjuangan sunyi melawan kelelahan yang merayap di tulang-tulang.
@@ -62,7 +67,7 @@ Harga diri juga terlihat di hal-hal kecil. Cara kita merapikan meja kerja. Cara 
   }
 };
 
-function capitalizeSlug(slug: string): string {
+function toTitleCase(slug: string): string {
   return slug
     .split("-")
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -83,8 +88,6 @@ export default async function BookDetailPage({ params }: PageProps) {
     <div
       style={{
         minHeight: "100vh",
-        background: "radial-gradient(circle at top, #111 0%, #050505 100%)",
-        color: "#e4e2df",
         padding: "100px 20px"
       }}
     >
@@ -96,24 +99,20 @@ export default async function BookDetailPage({ params }: PageProps) {
       >
         <h1
           style={{
-            fontFamily: "Georgia, 'Times New Roman', serif",
             fontSize: "36px",
             fontWeight: 400,
             marginBottom: "80px",
             textAlign: "center",
-            letterSpacing: "0.05em",
-            color: "#e4e2df"
+            letterSpacing: "0.05em"
           }}
         >
-          {book.title}
+          {toTitleCase(slug)}
         </h1>
 
         <div
           style={{
-            fontFamily: "Georgia, 'Times New Roman', serif",
             fontSize: "18px",
             lineHeight: "2.2",
-            color: "#e4e2df",
             opacity: 0.9
           }}
         >
@@ -144,8 +143,7 @@ export default async function BookDetailPage({ params }: PageProps) {
               border: "1px solid rgba(228, 226, 223, 0.3)",
               color: "#e4e2df",
               textDecoration: "none",
-              fontFamily: "Georgia, 'Times New Roman', serif",
-              fontSize: "12px",
+              fontSize: "11px",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               transition: "opacity 0.3s ease",
@@ -166,4 +164,3 @@ export default async function BookDetailPage({ params }: PageProps) {
     </div>
   );
 }
-
