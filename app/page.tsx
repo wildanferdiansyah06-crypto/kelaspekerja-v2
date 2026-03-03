@@ -24,7 +24,8 @@ export default function Home() {
   const generateNew = () => {
     setFade(false);
     setTimeout(() => {
-      const random = writings[Math.floor(Math.random() * writings.length)];
+      const random =
+        writings[Math.floor(Math.random() * writings.length)];
       setText(random);
       setFade(true);
     }, 200);
@@ -34,7 +35,8 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "#0b0b0b",
+        background:
+          "radial-gradient(circle at top, #121212 0%, #080808 100%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -45,15 +47,28 @@ export default function Home() {
         style={{
           width: "100%",
           maxWidth: "760px",
-          backgroundColor: "#141414",
-          padding: "100px 60px",
-          border: "1px solid #1f1f1f",
-          boxShadow: "0 0 40px rgba(0,0,0,0.5)",
-          color: "#e8e6e3",
+          backgroundColor: "#161514",
+          padding: "120px 70px",
+          border: "1px solid #1c1b1a",
+          boxShadow: "0 0 60px rgba(0,0,0,0.6)",
+          color: "#e4e2df",
           fontFamily: "Georgia, serif",
-          textAlign: "center"
+          textAlign: "center",
+          position: "relative"
         }}
       >
+        {/* Top line */}
+        <div
+          style={{
+            position: "absolute",
+            top: "40px",
+            left: "70px",
+            right: "70px",
+            height: "1px",
+            backgroundColor: "#242322"
+          }}
+        />
+
         <h1
           style={{
             fontSize: "22px",
@@ -101,6 +116,18 @@ export default function Home() {
         >
           halaman lain
         </button>
+
+        {/* Bottom line */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "40px",
+            left: "70px",
+            right: "70px",
+            height: "1px",
+            backgroundColor: "#242322"
+          }}
+        />
       </div>
     </main>
   );
