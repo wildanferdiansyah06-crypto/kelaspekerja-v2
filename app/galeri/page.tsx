@@ -18,20 +18,16 @@ export default function GalleryPage() {
     <div
       style={{
         minHeight: "100vh",
-        background: "radial-gradient(circle at top, #111 0%, #050505 100%)",
-        color: "#e4e2df",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "80px 20px",
-        boxSizing: "border-box"
+        padding: "80px 20px"
       }}
     >
       <h1
         style={{
-          fontFamily: "Georgia, 'Times New Roman', serif",
-          fontSize: "14px",
-          letterSpacing: "0.5em",
+          fontSize: "12px",
+          letterSpacing: "0.6em",
           textTransform: "uppercase",
           marginBottom: "120px",
           fontWeight: 400,
@@ -42,7 +38,6 @@ export default function GalleryPage() {
       </h1>
 
       <div style={{ position: "relative" }}>
-        {/* Rak kayu */}
         <div
           style={{
             position: "absolute",
@@ -57,7 +52,6 @@ export default function GalleryPage() {
           }}
         />
 
-        {/* Container buku */}
         <div
           style={{
             display: "flex",
@@ -72,9 +66,7 @@ export default function GalleryPage() {
               <Link
                 key={book.slug}
                 href={`/galeri/${book.slug}`}
-                style={{
-                  textDecoration: "none"
-                }}
+                style={{ textDecoration: "none" }}
               >
                 <div
                   style={{
@@ -95,8 +87,7 @@ export default function GalleryPage() {
                     alignItems: "center",
                     justifyContent: "center",
                     cursor: "pointer",
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    position: "relative"
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease"
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-15px)";
@@ -111,7 +102,6 @@ export default function GalleryPage() {
                     style={{
                       writingMode: "vertical-rl",
                       textOrientation: "mixed",
-                      fontFamily: "Georgia, 'Times New Roman', serif",
                       fontSize: "16px",
                       letterSpacing: "0.15em",
                       color: "#e4e2df",
