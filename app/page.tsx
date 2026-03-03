@@ -142,7 +142,21 @@ export default function Home() {
           }}
         >
           HALAMAN LAIN
+          import Link from "next/link";
         </button>
+        <Link href="/galeri">
+  <div
+    style={{
+      marginTop: "30px",
+      fontSize: "12px",
+      letterSpacing: "3px",
+      color: "#666",
+      cursor: "pointer"
+    }}
+  >
+    GALERI LAIN
+  </div>
+</Link>
 
         {/* Bottom Line */}
         <div
