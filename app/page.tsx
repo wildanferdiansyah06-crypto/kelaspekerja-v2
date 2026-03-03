@@ -19,51 +19,79 @@ export default function Home() {
   const [text, setText] = useState(
     writings[Math.floor(Math.random() * writings.length)]
   );
+  const [fade, setFade] = useState(true);
 
   const generateNew = () => {
-    const random = writings[Math.floor(Math.random() * writings.length)];
-    setText(random);
+    setFade(false);
+    setTimeout(() => {
+      const random = writings[Math.floor(Math.random() * writings.length)];
+      setText(random);
+      setFade(true);
+    }, 200);
   };
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "#0f0f0f",
-        color: "#f5f5f5",
+        backgroundColor: "#111111",
+        color: "#e8e6e3",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "serif",
+        fontFamily: "Georgia, serif",
         textAlign: "center",
         padding: "40px"
       }}
     >
-      <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>
+      <h1
+        style={{
+          fontSize: "28px",
+          letterSpacing: "4px",
+          marginBottom: "20px",
+          fontWeight: 400
+        }}
+      >
         KELAS PEKERJA
       </h1>
 
-      <p style={{ opacity: 0.6, marginBottom: "60px" }}>
-        Ruang sunyi untuk mereka yang tetap berdiri.
+      <p
+        style={{
+          opacity: 0.4,
+          marginBottom: "80px",
+          fontSize: "14px"
+        }}
+      >
+        catatan bagi mereka yang tetap berdiri
       </p>
 
-      <div style={{ maxWidth: "600px", fontSize: "20px", lineHeight: "1.8" }}>
+      <div
+        style={{
+          maxWidth: "640px",
+          fontSize: "22px",
+          lineHeight: "2",
+          transition: "opacity 0.4s ease",
+          opacity: fade ? 1 : 0
+        }}
+      >
         {text}
       </div>
 
       <button
         onClick={generateNew}
         style={{
-          marginTop: "60px",
-          padding: "10px 20px",
+          marginTop: "80px",
+          padding: "8px 18px",
           background: "transparent",
-          border: "1px solid #555",
-          color: "#f5f5f5",
-          cursor: "pointer"
+          border: "1px solid #333",
+          color: "#aaa",
+          cursor: "pointer",
+          fontSize: "13px",
+          letterSpacing: "1px"
         }}
       >
-        Baca yang lain
+        halaman lain
       </button>
     </main>
   );
