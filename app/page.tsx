@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Cormorant_Garamond } from "next/font/google";
 
 const cormorant = Cormorant_Garamond({
@@ -68,7 +69,7 @@ export default function Home() {
           overflow: "hidden"
         }}
       >
-        {/* Subtle grain overlay */}
+        {/* Grain */}
         <div
           style={{
             position: "absolute",
@@ -78,18 +79,6 @@ export default function Home() {
             backgroundSize: "4px 4px",
             opacity: 0.15,
             pointerEvents: "none"
-          }}
-        />
-
-        {/* Top Line */}
-        <div
-          style={{
-            position: "absolute",
-            top: "50px",
-            left: "80px",
-            right: "80px",
-            height: "1px",
-            backgroundColor: "#242322"
           }}
         />
 
@@ -121,8 +110,7 @@ export default function Home() {
             fontSize: "30px",
             lineHeight: "2.3",
             transition: "opacity 0.5s ease",
-            opacity: fade ? 0 : 1,
-            fontWeight: 400
+            opacity: fade ? 0 : 1
           }}
         >
           {text}
@@ -142,33 +130,21 @@ export default function Home() {
           }}
         >
           HALAMAN LAIN
-          import Link from "next/link";
         </button>
-        <Link href="/galeri">
-  <div
-    style={{
-      marginTop: "30px",
-      fontSize: "12px",
-      letterSpacing: "3px",
-      color: "#666",
-      cursor: "pointer"
-    }}
-  >
-    GALERI LAIN
-  </div>
-</Link>
 
-        {/* Bottom Line */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "50px",
-            left: "80px",
-            right: "80px",
-            height: "1px",
-            backgroundColor: "#242322"
-          }}
-        />
+        <Link href="/galeri" style={{ textDecoration: "none" }}>
+          <div
+            style={{
+              marginTop: "30px",
+              fontSize: "12px",
+              letterSpacing: "3px",
+              color: "#666",
+              cursor: "pointer"
+            }}
+          >
+            GALERI LAIN
+          </div>
+        </Link>
       </div>
     </main>
   );
