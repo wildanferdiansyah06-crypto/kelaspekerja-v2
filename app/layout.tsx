@@ -1,16 +1,31 @@
+import "./globals.css";
+import { Playfair_Display, Cormorant_Garamond } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "600"]
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500"]
+});
+
 export const metadata = {
   title: "Kelas Pekerja V2",
-  description: "Ruang sunyi yang sedang dibangun perlahan."
-}
+  description: "Arsip sunyi orang-orang yang tetap bekerja."
+};
 
 export default function RootLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="id">
-      <body>{children}</body>
+      <body className={`${playfair.className}`}>
+        {children}
+      </body>
     </html>
-  )
+  );
 }
