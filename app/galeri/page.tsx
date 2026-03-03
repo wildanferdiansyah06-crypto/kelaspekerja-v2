@@ -1,108 +1,133 @@
-"use client";
-
 import Link from "next/link";
 
-const books = [
-  { id: 1, title: "Lembur", slug: "lembur" },
-  { id: 2, title: "Upah", slug: "upah" },
-  { id: 3, title: "Malam", slug: "malam" },
-  { id: 4, title: "Sunyi", slug: "sunyi" },
-  { id: 5, title: "Harga Diri", slug: "harga-diri" }
+interface Book {
+  title: string;
+  slug: string;
+}
+
+const books: Book[] = [
+  { title: "Lembur", slug: "lembur" },
+  { title: "Upah", slug: "upah" },
+  { title: "Malam", slug: "malam" },
+  { title: "Sunyi", slug: "sunyi" },
+  { title: "Harga Diri", slug: "harga-diri" }
 ];
 
-export default function Galeri() {
+export default function GalleryPage() {
   return (
-    <main
+    <div
       style={{
         minHeight: "100vh",
-        padding: "100px 40px",
         background: "radial-gradient(circle at top, #111 0%, #050505 100%)",
-        color: "#e4e2df"
+        color: "#e4e2df",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "80px 20px",
+        boxSizing: "border-box"
       }}
     >
       <h1
         style={{
-          textAlign: "center",
-          letterSpacing: "6px",
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          fontSize: "14px",
+          letterSpacing: "0.5em",
+          textTransform: "uppercase",
           marginBottom: "120px",
-          fontWeight: 400
+          fontWeight: 400,
+          opacity: 0.9
         }}
       >
-        RAK BUKU
+        Rak Buku
       </h1>
 
-      {/* Shelf Container */}
-      <div
-        style={{
-          position: "relative",
-          maxWidth: "900px",
-          margin: "0 auto"
-        }}
-      >
-        {/* Wooden Shelf */}
+      <div style={{ position: "relative" }}>
+        {/* Rak kayu */}
         <div
           style={{
             position: "absolute",
-            bottom: "-15px",
-            left: 0,
-            right: 0,
-            height: "20px",
-            background: "linear-gradient(to bottom, #2a1f17, #1a120d)",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.8)"
+            bottom: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "calc(100% + 60px)",
+            height: "12px",
+            background: "linear-gradient(180deg, #3d3229 0%, #2a231c 50%, #1a1612 100%)",
+            borderRadius: "2px",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.8), 0 8px 40px rgba(0,0,0,0.6)"
           }}
         />
 
-        {/* Books Row */}
+        {/* Container buku */}
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
-            gap: "25px"
+            gap: "8px",
+            paddingBottom: "12px",
+            alignItems: "flex-end"
           }}
         >
-          {books.map((book) => (
-            <Link
-              key={book.id}
-              href={`/galeri/${book.slug}`}
-              style={{ textDecoration: "none" }}
-            >
-              <div
+          {books.map((book, index) => {
+            const hue = 15 + index * 8;
+            return (
+              <Link
+                key={book.slug}
+                href={`/galeri/${book.slug}`}
                 style={{
-                  width: "110px",
-                  height: "260px",
-                  background:
-                    "linear-gradient(to right, #1a1a1a, #242323, #1a1a1a)",
-                  border: "1px solid #2d2c2b",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  writingMode: "vertical-rl",
-                  textOrientation: "mixed",
-                  letterSpacing: "3px",
-                  fontSize: "14px",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  cursor: "pointer",
-                  boxShadow: "0 5px 15px rgba(0,0,0,0.6)"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform =
-                    "translateY(-15px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 15px 35px rgba(0,0,0,0.8)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform =
-                    "translateY(0px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 5px 15px rgba(0,0,0,0.6)";
+                  textDecoration: "none"
                 }}
               >
-                {book.title}
-              </div>
-            </Link>
-          ))}
+                <div
+                  style={{
+                    width: "110px",
+                    height: "260px",
+                    background: `linear-gradient(90deg, 
+                      hsl(${hue}, 20%, 22%) 0%, 
+                      hsl(${hue}, 18%, 28%) 15%, 
+                      hsl(${hue}, 15%, 32%) 50%, 
+                      hsl(${hue}, 18%, 26%) 85%, 
+                      hsl(${hue}, 20%, 20%) 100%)`,
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    borderLeft: "2px solid rgba(255,255,255,0.15)",
+                    borderRight: "2px solid rgba(0,0,0,0.3)",
+                    borderRadius: "2px 4px 4px 2px",
+                    boxShadow: "inset 2px 0 4px rgba(255,255,255,0.05), -2px 0 8px rgba(0,0,0,0.4)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    position: "relative"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-15px)";
+                    e.currentTarget.style.boxShadow = "inset 2px 0 4px rgba(255,255,255,0.05), -4px 8px 24px rgba(0,0,0,0.6)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "inset 2px 0 4px rgba(255,255,255,0.05), -2px 0 8px rgba(0,0,0,0.4)";
+                  }}
+                >
+                  <span
+                    style={{
+                      writingMode: "vertical-rl",
+                      textOrientation: "mixed",
+                      fontFamily: "Georgia, 'Times New Roman', serif",
+                      fontSize: "16px",
+                      letterSpacing: "0.15em",
+                      color: "#e4e2df",
+                      opacity: 0.85,
+                      padding: "20px 0",
+                      textShadow: "0 1px 2px rgba(0,0,0,0.5)"
+                    }}
+                  >
+                    {book.title}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
