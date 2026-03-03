@@ -34,65 +34,74 @@ export default function Home() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "#111111",
-        color: "#e8e6e3",
+        backgroundColor: "#0b0b0b",
         display: "flex",
-        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "Georgia, serif",
-        textAlign: "center",
         padding: "40px"
       }}
     >
-      <h1
-        style={{
-          fontSize: "28px",
-          letterSpacing: "4px",
-          marginBottom: "20px",
-          fontWeight: 400
-        }}
-      >
-        KELAS PEKERJA
-      </h1>
-
-      <p
-        style={{
-          opacity: 0.4,
-          marginBottom: "80px",
-          fontSize: "14px"
-        }}
-      >
-        catatan bagi mereka yang tetap berdiri
-      </p>
-
       <div
         style={{
-          maxWidth: "640px",
-          fontSize: "22px",
-          lineHeight: "2",
-          transition: "opacity 0.4s ease",
-          opacity: fade ? 1 : 0
+          width: "100%",
+          maxWidth: "760px",
+          backgroundColor: "#141414",
+          padding: "100px 60px",
+          border: "1px solid #1f1f1f",
+          boxShadow: "0 0 40px rgba(0,0,0,0.5)",
+          color: "#e8e6e3",
+          fontFamily: "Georgia, serif",
+          textAlign: "center"
         }}
       >
-        {text}
-      </div>
+        <h1
+          style={{
+            fontSize: "22px",
+            letterSpacing: "6px",
+            marginBottom: "30px",
+            fontWeight: 400
+          }}
+        >
+          KELAS PEKERJA
+        </h1>
 
-      <button
-        onClick={generateNew}
-        style={{
-          marginTop: "80px",
-          padding: "8px 18px",
-          background: "transparent",
-          border: "1px solid #333",
-          color: "#aaa",
-          cursor: "pointer",
-          fontSize: "13px",
-          letterSpacing: "1px"
-        }}
-      >
-        halaman lain
-      </button>
+        <p
+          style={{
+            opacity: 0.35,
+            marginBottom: "80px",
+            fontSize: "13px"
+          }}
+        >
+          arsip sunyi orang-orang yang tetap bekerja
+        </p>
+
+        <div
+          style={{
+            fontSize: "24px",
+            lineHeight: "2.2",
+            transition: "opacity 0.4s ease",
+            opacity: fade ? 1 : 0
+          }}
+        >
+          {text}
+        </div>
+
+        <button
+          onClick={generateNew}
+          style={{
+            marginTop: "90px",
+            padding: "6px 18px",
+            background: "transparent",
+            border: "1px solid #2a2a2a",
+            color: "#888",
+            cursor: "pointer",
+            fontSize: "12px",
+            letterSpacing: "2px"
+          }}
+        >
+          halaman lain
+        </button>
+      </div>
     </main>
   );
 }
