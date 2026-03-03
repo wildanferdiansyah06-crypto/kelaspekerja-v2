@@ -2,150 +2,191 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Cormorant_Garamond } from "next/font/google";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500"]
-});
-
-const writings = [
-  "Kami tidak banyak bicara. Kami hanya pulang lebih malam.",
-  "Lelah itu biasa. Menyerah itu mewah.",
-  "Kami bekerja dalam sunyi, tapi mimpi kami tidak kecil.",
-  "Tidak semua perjuangan perlu sorotan.",
-  "Upah bisa kecil. Harga diri jangan.",
-  "Kami bangun sebelum matahari, pulang setelah lampu jalan menyala.",
-  "Kadang yang paling kuat adalah yang paling jarang mengeluh.",
-  "Sunyi bukan berarti kosong.",
-  "Kerja keras tidak selalu terlihat, tapi selalu terasa.",
-  "Kami bukan siapa-siapa, tapi kami tetap ada."
+const sentences: string[] = [
+  "Kita bekerja bukan untuk hidup, tapi hidup terpaksa bekerja.",
+  "Lelah adalah bahasa yang hanya dimengerti oleh tubuh.",
+  "Di balik setiap produktivitas, ada sunyi yang tak terucap.",
+  "Kelas pekerja tidur dengan mimpi yang belum sempat dikejar.",
+  "Upah kita adalah waktu yang tak bisa kembali.",
+  "Kerja keras adalah kebanggaan yang sering disalahartikan.",
+  "Di ruang sunyi ini, kita menemukan suara diri sendiri.",
+  "Lembur adalah puisi yang ditulis dengan mata perih.",
+  "Harga diri tidak bisa ditukar dengan bonus akhir tahun.",
+  "Kita adalah mesin yang belajar merasakan lelah.",
+  "Setiap pagi adalah pertempuran melawan kemalasan yang wajar.",
+  "Kerja itu ibadah, tapi ibadah juga butuh istirahat.",
+  "Di antara deadline, kita lupa bahwa waktu adalah milik kita.",
+  "Sunyi bukan kekosongan, tapi ruang untuk bertahan.",
+  "Pekerjaan baik adalah yang membiarkan kita tetap manusia.",
+  "Kita menukar mimpi dengan stabilitas yang rapuh.",
+  "Lelah fisik sembuh dengan tidur, lelah jiwa butuh makna.",
+  "Kelas pekerja adalah kelas yang terlalu sibuk untuk protes.",
+  "Di balik layar, ada mata yang perih dan punggung yang bungkuk.",
+  "Kerja adalah cara kita membuktikan eksistensi.",
+  "Tapi eksistensi seharusnya tidak perlu dibuktikan.",
+  "Kita adalah arsip sunyi peradaban yang terus berjalan.",
+  "Setiap gaji adalah pengakuan sekaligus penolakan terhadap nilai kita.",
+  "Malam adalah sahabat pekerja yang terlambat pulang.",
+  "Kita membangun impian orang lain sambil menunda impian sendiri.",
+  "Hemat senyum di kantor, karena senyum juga butuh tenaga.",
+  "Di toilet kantor, ada air mata yang tak pernah terlihat.",
+  "Kelas pekerja adalah pahlawan tanpa topeng.",
+  "Kita bertahan bukan karena kuat, tapi karena harus.",
+  "Suatu hari nanti, sunyi ini akan berbicara."
 ];
 
-export default function Home() {
-  const [text, setText] = useState(
-    writings[Math.floor(Math.random() * writings.length)]
-  );
-  const [fade, setFade] = useState(false);
-  const [pageVisible, setPageVisible] = useState(false);
+export default function HomePage() {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    setTimeout(() => setPageVisible(true), 200);
+    const randomIndex = Math.floor(Math.random() * sentences.length);
+    setCurrentIndex(randomIndex);
+    
+    const loadTimer = setTimeout(() => {
+      setIsLoaded(true);
+      setIsVisible(true);
+    }, 100);
+
+    return () => clearTimeout(loadTimer);
   }, []);
 
-  const generateNew = () => {
-    setFade(true);
+  const handleNextPage = () => {
+    setIsVisible(false);
+    
     setTimeout(() => {
-      const random =
-        writings[Math.floor(Math.random() * writings.length)];
-      setText(random);
-      setFade(false);
+      let newIndex = Math.floor(Math.random() * sentences.length);
+      while (newIndex === currentIndex && sentences.length > 1) {
+        newIndex = Math.floor(Math.random() * sentences.length);
+      }
+      setCurrentIndex(newIndex);
+      setIsVisible(true);
     }, 300);
   };
 
   return (
-    <main
+    <div
       style={{
         minHeight: "100vh",
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
-        padding: "40px",
-        transition: "opacity 1.2s ease, transform 1.2s ease",
-        opacity: pageVisible ? 1 : 0,
-        transform: pageVisible ? "translateY(0px)" : "translateY(20px)"
+        justifyContent: "center",
+        padding: "40px 20px"
       }}
     >
-      <div
+      <main
         style={{
+          maxWidth: "760px",
           width: "100%",
-          maxWidth: "780px",
-          backgroundColor: "#151413",
-          padding: "130px 80px",
-          border: "1px solid #1c1b1a",
-          boxShadow: "0 0 80px rgba(0,0,0,0.7)",
+          padding: "120px 60px",
+          border: "1px solid rgba(228, 226, 223, 0.15)",
+          boxShadow: "0 0 60px rgba(0, 0, 0, 0.5)",
           textAlign: "center",
-          position: "relative",
-          overflow: "hidden"
+          opacity: isLoaded ? 1 : 0,
+          transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.8s ease, transform 0.8s ease"
         }}
       >
-        {/* Grain */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "4px 4px",
-            opacity: 0.15,
-            pointerEvents: "none"
-          }}
-        />
-
         <h1
           style={{
-            fontSize: "24px",
-            letterSpacing: "8px",
-            marginBottom: "40px",
-            fontWeight: 400
+            fontSize: "12px",
+            letterSpacing: "0.6em",
+            textTransform: "uppercase",
+            marginBottom: "16px",
+            fontWeight: 400,
+            opacity: 0.9
           }}
         >
-          KELAS PEKERJA
+          Kelas Pekerja
         </h1>
 
         <p
           style={{
-            opacity: 0.35,
-            marginBottom: "100px",
-            fontSize: "13px",
-            letterSpacing: "2px"
+            fontSize: "11px",
+            letterSpacing: "0.15em",
+            opacity: 0.6,
+            marginBottom: "80px",
+            fontStyle: "italic"
           }}
         >
           arsip sunyi orang-orang yang tetap bekerja
         </p>
 
         <div
-          className={cormorant.className}
           style={{
-            fontSize: "30px",
-            lineHeight: "2.3",
-            transition: "opacity 0.5s ease",
-            opacity: fade ? 0 : 1
+            minHeight: "200px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "80px"
           }}
         >
-          {text}
+          <p
+            style={{
+              fontSize: "24px",
+              lineHeight: "2.2",
+              fontStyle: "italic",
+              opacity: isVisible ? 0.9 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(10px)",
+              transition: "opacity 0.3s ease, transform 0.3s ease",
+              maxWidth: "600px"
+            }}
+          >
+            {sentences[currentIndex]}
+          </p>
         </div>
 
         <button
-          onClick={generateNew}
+          onClick={handleNextPage}
           style={{
-            marginTop: "110px",
-            padding: "8px 20px",
+            padding: "16px 32px",
+            border: "1px solid rgba(228, 226, 223, 0.3)",
             background: "transparent",
-            border: "1px solid #2a2a2a",
-            color: "#888",
+            color: "#e4e2df",
+            fontFamily: "inherit",
+            fontSize: "11px",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
             cursor: "pointer",
-            fontSize: "12px",
-            letterSpacing: "3px"
+            marginBottom: "40px",
+            transition: "opacity 0.3s ease",
+            opacity: 0.7
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = "1";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = "0.7";
           }}
         >
-          HALAMAN LAIN
+          Halaman Lain
         </button>
 
-        <Link href="/galeri" style={{ textDecoration: "none" }}>
-          <div
+        <div>
+          <Link
+            href="/galeri"
             style={{
-              marginTop: "30px",
-              fontSize: "12px",
-              letterSpacing: "3px",
-              color: "#666",
-              cursor: "pointer"
+              fontSize: "10px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#e4e2df",
+              textDecoration: "none",
+              opacity: 0.5,
+              transition: "opacity 0.3s ease"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "0.8";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "0.5";
             }}
           >
-            GALERI LAIN
-          </div>
-        </Link>
-      </div>
-    </main>
+            Galeri Lain
+          </Link>
+        </div>
+      </main>
+    </div>
   );
 }
