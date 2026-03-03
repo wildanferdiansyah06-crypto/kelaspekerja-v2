@@ -1,0 +1,9 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #121212 0%, #080808 100%);
+  color: #e4e2df;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
