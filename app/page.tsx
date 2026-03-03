@@ -1,6 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Cormorant_Garamond } from "next/font/google";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500"]
+});
 
 const writings = [
   "Kami tidak banyak bicara. Kami hanya pulang lebih malam.",
@@ -19,51 +25,69 @@ export default function Home() {
   const [text, setText] = useState(
     writings[Math.floor(Math.random() * writings.length)]
   );
-  const [fade, setFade] = useState(true);
+  const [fade, setFade] = useState(false);
+  const [pageVisible, setPageVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setPageVisible(true), 200);
+  }, []);
 
   const generateNew = () => {
-    setFade(false);
+    setFade(true);
     setTimeout(() => {
       const random =
         writings[Math.floor(Math.random() * writings.length)];
       setText(random);
-      setFade(true);
-    }, 200);
+      setFade(false);
+    }, 300);
   };
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top, #121212 0%, #080808 100%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "40px"
+        padding: "40px",
+        transition: "opacity 1.2s ease, transform 1.2s ease",
+        opacity: pageVisible ? 1 : 0,
+        transform: pageVisible ? "translateY(0px)" : "translateY(20px)"
       }}
     >
       <div
         style={{
           width: "100%",
-          maxWidth: "760px",
-          backgroundColor: "#161514",
-          padding: "120px 70px",
+          maxWidth: "780px",
+          backgroundColor: "#151413",
+          padding: "130px 80px",
           border: "1px solid #1c1b1a",
-          boxShadow: "0 0 60px rgba(0,0,0,0.6)",
-          color: "#e4e2df",
-          fontFamily: "Georgia, serif",
+          boxShadow: "0 0 80px rgba(0,0,0,0.7)",
           textAlign: "center",
-          position: "relative"
+          position: "relative",
+          overflow: "hidden"
         }}
       >
-        {/* Top line */}
+        {/* Subtle grain overlay */}
         <div
           style={{
             position: "absolute",
-            top: "40px",
-            left: "70px",
-            right: "70px",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "4px 4px",
+            opacity: 0.15,
+            pointerEvents: "none"
+          }}
+        />
+
+        {/* Top Line */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50px",
+            left: "80px",
+            right: "80px",
             height: "1px",
             backgroundColor: "#242322"
           }}
@@ -71,9 +95,9 @@ export default function Home() {
 
         <h1
           style={{
-            fontSize: "22px",
-            letterSpacing: "6px",
-            marginBottom: "30px",
+            fontSize: "24px",
+            letterSpacing: "8px",
+            marginBottom: "40px",
             fontWeight: 400
           }}
         >
@@ -83,19 +107,22 @@ export default function Home() {
         <p
           style={{
             opacity: 0.35,
-            marginBottom: "80px",
-            fontSize: "13px"
+            marginBottom: "100px",
+            fontSize: "13px",
+            letterSpacing: "2px"
           }}
         >
           arsip sunyi orang-orang yang tetap bekerja
         </p>
 
         <div
+          className={cormorant.className}
           style={{
-            fontSize: "24px",
-            lineHeight: "2.2",
-            transition: "opacity 0.4s ease",
-            opacity: fade ? 1 : 0
+            fontSize: "30px",
+            lineHeight: "2.3",
+            transition: "opacity 0.5s ease",
+            opacity: fade ? 0 : 1,
+            fontWeight: 400
           }}
         >
           {text}
@@ -104,26 +131,26 @@ export default function Home() {
         <button
           onClick={generateNew}
           style={{
-            marginTop: "90px",
-            padding: "6px 18px",
+            marginTop: "110px",
+            padding: "8px 20px",
             background: "transparent",
             border: "1px solid #2a2a2a",
             color: "#888",
             cursor: "pointer",
             fontSize: "12px",
-            letterSpacing: "2px"
+            letterSpacing: "3px"
           }}
         >
-          halaman lain
+          HALAMAN LAIN
         </button>
 
-        {/* Bottom line */}
+        {/* Bottom Line */}
         <div
           style={{
             position: "absolute",
-            bottom: "40px",
-            left: "70px",
-            right: "70px",
+            bottom: "50px",
+            left: "80px",
+            right: "80px",
             height: "1px",
             backgroundColor: "#242322"
           }}
